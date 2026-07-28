@@ -3,7 +3,7 @@
 <%
     request.setAttribute("titulo", "Gestión de Membresías - Sistema FitCIMM");
 
-    // Instanciar el controlador y listar
+    // Instanciar el controlador y listar todo el historial
     MembresiaController controller = new MembresiaController();
     controller.MtListarMembresias();
     List<Membresia> membresias = controller.getMembresias();
@@ -31,12 +31,19 @@
 
     <!-- Encabezado y Acciones principales -->
     <div class="row mb-4 align-items-center">
-        <div class="col-md-8">
-            <h2><i class="bi bi-card-heading text-primary"></i> Control de Membresías</h2>
-            <p class="text-muted mb-0">Historial de ventas y renovaciones de planes por socio</p>
+        <div class="col-md-5">
+            <h2><i class="bi bi-card-heading text-danger"></i> Control de Membresías</h2>
         </div>
-        <div class="col-md-4 text-md-end mt-3 mt-md-0">
-            <a href="<%= request.getContextPath()%>/views/membresia/crear.jsp" class="btn btn-success">
+        
+        <!-- BOTONES DE ACCIÓN -->
+        <div class="col-md-7 text-md-end mt-3 mt-md-0 d-flex justify-content-md-end gap-2 flex-wrap">
+            <a href="<%= request.getContextPath()%>/views/membresia/reporteFechas.jsp" class="btn btn-outline-dark">
+                <i class="bi bi-cash-stack"></i> Reporte
+            </a>
+            <a href="<%= request.getContextPath()%>/views/membresia/activos.jsp" class="btn btn-outline-danger">
+                <i class="bi bi-person-check-fill"></i> Ver Socios Activos
+            </a>
+            <a href="<%= request.getContextPath()%>/views/membresia/crear.jsp" class="btn btn-danger text-white fw-bold">
                 <i class="bi bi-cart-plus-fill"></i> Vender / Renovar Membresía
             </a>
         </div>
@@ -70,14 +77,14 @@
                     <tbody>
                         <% if (membresias == null || membresias.isEmpty()) { %>
                         <tr>
-                            <td colspan="7" class="text-center py-4 text-muted">
+                            <td colspan="6" class="text-center py-4 text-muted">
                                 <i class="bi bi-inbox fs-1 d-block mb-2"></i>
                                 No hay historial de membresías registradas.
                             </td>
                         </tr>
                         <% } else {
                             for (Membresia m : membresias) {
-                                String estado = m.getEstadoCalculado(); // ACTIVA o VENCIDA
+                                String estado = m.getEstadoCalculado();
                         %>
                         <tr>
                             <td>
@@ -99,7 +106,7 @@
                             <td class="text-center">
                                 <small class="fw-bold"><%= m.getFechaFin()%></small>
                             </td>
-                            <td class="text-end text-success fw-bold">
+                            <td class="text-end text-dark fw-bold">
                                 $<%= String.format("%,.0f", m.getValorPagado() != null ? m.getValorPagado().doubleValue() : 0.0)%>
                             </td>
                             <td class="text-center">
@@ -110,7 +117,6 @@
                                 <% } else { %>
                                 <span class="badge bg-danger"><i class="bi bi-clock-history"></i> VENCIDA</span>
                                 <% } %>
-                            </td>
                             </td>
                         </tr>
                         <%

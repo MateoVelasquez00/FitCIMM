@@ -38,6 +38,7 @@ public String MtRegistrarPorDocumento(String documento) throws Exception {
     Ingreso nuevoIngreso = new Ingreso();
     nuevoIngreso.setIdSocio(socio.getId());
 
+
     boolean guardado = ingresoDAO.MtInsertarIngreso(nuevoIngreso);
     if (!guardado) {
         throw new Exception("Ocurrió un error en la base de datos al registrar el ingreso.");

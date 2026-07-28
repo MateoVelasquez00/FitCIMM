@@ -1,6 +1,8 @@
 package service;
 
 import dao.PlanDAO;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import model.Plan;
 
@@ -45,4 +47,8 @@ public class PlanService {
     public boolean MtTieneMembresiasAsociadas(int idPlan) {
         return planDAO.MtTieneMembresiasAsociadas(idPlan);
     }
+   public Plan MtPlanMasVendidoDelMes(LocalDate fechaInicio, LocalDate fechaFin) {
+    return planDAO.MtPlanMasVendidoDelMes(fechaInicio, fechaFin);
+
+}
 }

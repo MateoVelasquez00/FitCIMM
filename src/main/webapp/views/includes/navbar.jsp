@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar-sena mb-4">
     <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="<%= request.getContextPath()%>/">
-            <i class="bi bi-trophy-fill fs-3 me-2"></i>
+            <i class="bi bi-trophy-fill fs-3 me-2 text-danger"></i>
             <span class="fw-bold">Sistema FitCIMM</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

@@ -29,8 +29,7 @@ public class IngresoDAO {
     }
 
     public boolean MtIngresoHoy(int idSocio, LocalDate fecha) {
-        String consulta = "SELECT COUNT(*) FROM ingreso"
-                + "WHERE id_socio AND fecha_ingreso = ?";
+        String consulta = "SELECT COUNT(*) FROM ingreso WHERE id_socio = ? AND fecha_ingreso = ?";
 
         try (Connection conn = Conexion.getConnection(); PreparedStatement pstmt = conn.prepareStatement(consulta)) {
 
