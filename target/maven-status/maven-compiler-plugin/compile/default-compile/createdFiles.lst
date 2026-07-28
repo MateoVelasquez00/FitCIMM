@@ -1,0 +1,17 @@
+service\IngresoService.class
+service\SocioService.class
+dao\IngresoDAO.class
+model\Ingreso.class
+model\Socio.class
+controller\MembresiaController.class
+model\Plan.class
+service\MembresiaService.class
+dao\PlanDAO.class
+dao\Conexion.class
+model\Membresia.class
+controller\IngresoController.class
+controller\PlanController.class
+dao\SocioDAO.class
+service\PlanService.class
+dao\MembresiaDAO.class
+controller\SocioController.class
