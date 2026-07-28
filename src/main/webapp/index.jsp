@@ -111,7 +111,7 @@
                         <i class="bi bi-person-plus-fill text-success"></i> Ingreso Diario
                     </h5>
                     <p class="card-text text-muted"> Realizar Ingreso Diario</p>
-                    <a href="<%= request.getContextPath()%>/views/socio/crear.jsp" class="btn btn-outline-success btn-sm">
+                    <a href="<%= request.getContextPath()%>/views/ingreso/crear.jsp" class="btn btn-outline-success btn-sm">
                         <i class="bi bi-arrow-right"></i> Realizar Ingreso
                     </a>
                 </div>
