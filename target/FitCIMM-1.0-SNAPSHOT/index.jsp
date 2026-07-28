@@ -17,7 +17,7 @@
     request.setAttribute("totalPlanes", totalPlanes);
     request.setAttribute("totalMembresias", totalMembresias);
     request.setAttribute("totalIngresos", totalIngresos);
-    
+
 %>
 
 <jsp:include page="views/includes/header.jsp" />
@@ -118,5 +118,4 @@
             </div>
         </div>
     </div>
-
 </div>
