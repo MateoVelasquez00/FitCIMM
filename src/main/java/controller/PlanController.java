@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import service.PlanService;
 import model.Plan;
@@ -85,6 +86,20 @@ public class PlanController implements Serializable {
             return "error";
         }
     }
+    
+    private Plan planMasVendido;
+
+public String MtPlanMasVendidoDelMes(LocalDate fechaInicio, LocalDate fechaFin) {
+    try {
+        planMasVendido = planService.MtPlanMasVendidoDelMes(fechaInicio, fechaFin);
+        return "success";
+    } catch (Exception e) {
+        mensaje = "Error al obtener el plan más vendido: " + e.getMessage();
+        tipoMensaje = "danger";
+        return "error";
+    }
+
+}
 
     public Plan getPlan() {
         return plan;
@@ -117,5 +132,8 @@ public class PlanController implements Serializable {
     public void setTipoMensaje(String tipoMensaje) {
         this.tipoMensaje = tipoMensaje;
     }
-
+    public Plan getPlanMasVendido() {
+    return planMasVendido;
 }
+}
+

@@ -32,11 +32,11 @@
     <!-- Encabezado y Acciones principales -->
     <div class="row mb-4 align-items-center">
         <div class="col-md-8">
-            <h2><i class="bi bi-door-open text-primary"></i> Registro de Ingresos</h2>
+            <h2><i class="bi bi-door-open text-danger"></i> Registro de Ingresos</h2>
             <p class="text-muted mb-0">Historial de accesos marcados en el gimnasio</p>
         </div>
         <div class="col-md-4 text-md-end mt-3 mt-md-0">
-            <a href="<%= request.getContextPath()%>/views/ingreso/crear.jsp" class="btn btn-success">
+            <a href="<%= request.getContextPath()%>/views/ingreso/crear.jsp" class="btn btn-danger text-white fw-bold">
                 <i class="bi bi-plus-circle"></i> Registrar Ingreso
             </a>
         </div>
@@ -97,8 +97,8 @@
                                 </small>
                             </td>
                             <td class="text-center">
-                                <span class="badge bg-info text-dark">
-                                    <i class="bi bi-clock me-1"></i><%= ing.getHoraIngreso() %>
+                                <span class="badge bg-dark text-white">
+                                    <i class="bi bi-clock me-1 text-danger"></i><%= ing.getHoraIngreso() %>
                                 </span>
                             </td>
                         </tr>

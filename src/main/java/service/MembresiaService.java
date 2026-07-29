@@ -53,4 +53,12 @@ public class MembresiaService {
     public List<Membresia> MtListarMembresias(){
         return membresiaDAO.MtListarMembresias();
     }
+    
+    public List< Membresia> MtSociosActivosVigentes () {
+        return membresiaDAO.MtSociosActivosVigentes();
+    }
+    
+   public List<Membresia> MtRecaudacionPorRangoFechas(LocalDate fechaInicio, LocalDate fechaFin) {
+    return membresiaDAO.MtRecaudacionPorRangoFechas(fechaInicio, fechaFin);
+}
 }

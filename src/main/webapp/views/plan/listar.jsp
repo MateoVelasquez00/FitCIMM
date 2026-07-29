@@ -27,19 +27,22 @@
     </div>
     <% }%>
     
-    <div class="row mb-4">
-        <div class="col-md-8">
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-6">
             <h2><i class="bi bi-people-fill text-warning"></i> Gestión de Planes</h2>
-            <p class="text-muted">Administración de Planes FitCIMM</p>
+            <p class="text-muted mb-0">Administración de Planes FitCIMM</p>
         </div>
-        <div class="col-md-4 text-end">
+        <div class="col-md-6 text-end d-flex justify-content-end gap-2 mt-3 mt-md-0">
+            <a href="<%= request.getContextPath()%>/views/plan/top.jsp" class="btn btn-outline-warning text-dark">
+                <i class="bi bi-trophy-fill"></i> Plan Más Vendido
+            </a>
             <a href="<%= request.getContextPath()%>/views/plan/crear.jsp" class="btn btn-sena">
                 <i class="bi bi-plus-circle"></i> Nuevo Plan
             </a>
         </div>
     </div>
 
-    <!-- Tabla de Aprendices -->
+    <!-- Tabla de Planes -->
     <div class="card shadow-sm">
         <div class="card-header card-header-sena">
             <h5 class="mb-0"><i class="bi bi-list"></i> Lista de Planes</h5>
@@ -59,7 +62,7 @@
                     <tbody>
                         <% if (planes.isEmpty()) { %>
                         <tr>
-                            <td colspan="7" class="text-center py-4 text-muted">
+                            <td colspan="5" class="text-center py-4 text-muted">
                                 <i class="bi bi-inbox fs-1 d-block mb-2"></i>
                                 No hay planes registrados
                             </td>

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import model.Plan;
@@ -134,4 +135,39 @@ public class PlanDAO {
         }
         return false;
     }
+public Plan MtPlanMasVendidoDelMes(LocalDate fechaInicio, LocalDate fechaFin) {
+    Plan plan = null;
+
+    String consulta = "SELECT p.id_plan, p.nombre, p.duracion_dias, p.valor, p.estado, "
+            + "COUNT(m.id_membresia) AS total_ventas "
+            + "FROM membresia m "
+            + "INNER JOIN plan p ON m.id_plan = p.id_plan "
+            + "WHERE m.fecha_inicio BETWEEN ? AND ? "
+            + "GROUP BY p.id_plan, p.nombre, p.duracion_dias, p.valor, p.estado "
+            + "ORDER BY total_ventas DESC "
+            + "LIMIT 1";
+
+    try (Connection conn = Conexion.getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(consulta)) {
+
+        pstmt.setDate(1, java.sql.Date.valueOf(fechaInicio));
+        pstmt.setDate(2, java.sql.Date.valueOf(fechaFin));
+
+        try (ResultSet rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                plan = new Plan();
+                plan.setId(rs.getInt("id_plan"));
+                plan.setNombre(rs.getString("nombre"));
+                plan.setDuracionDias(rs.getInt("duracion_dias"));
+                plan.setValor(rs.getBigDecimal("valor"));
+                plan.setEstado(rs.getBoolean("estado"));
+            }
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return plan;
 }
+}
+                                                                                                                                                    

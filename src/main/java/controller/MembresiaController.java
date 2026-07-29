@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import service.MembresiaService;
 import model.Membresia;
@@ -16,6 +17,8 @@ public class MembresiaController implements Serializable {
     private List<Socio> sociosPorVencer;
     private String mensaje;
     private String tipoMensaje;
+    private List<Membresia> sociosActivosVigentes;
+    private List<Membresia> recaudacionPorPlan;
 
     public MembresiaController() {
         this.membresiaService = new MembresiaService();
@@ -71,8 +74,30 @@ public class MembresiaController implements Serializable {
             tipoMensaje = "danger";
             return "error";
         }
+        
     }
-
+    public String MtSociosActivosVigentes() {
+        try {
+            // Llama a la capa de servicio y guarda la lista resultante
+            sociosActivosVigentes = membresiaService.MtSociosActivosVigentes();
+            return "success";
+        } catch (Exception e) {
+            mensaje = "Error al obtener el reporte de socios activos: " + e.getMessage();
+            tipoMensaje = "danger";
+            return "error";
+        }
+    }
+public String MtRecaudacionPorRangoFechas(LocalDate fechaInicio, LocalDate fechaFin) {
+    try {
+        // Llama a la capa de servicio pasando las fechas seleccionadas
+        recaudacionPorPlan = membresiaService.MtRecaudacionPorRangoFechas(fechaInicio, fechaFin);
+        return "success";
+    } catch (Exception e) {
+        mensaje = "Error al obtener la recaudación por plan: " + e.getMessage();
+        tipoMensaje = "danger";
+        return "error";
+    }
+}
     public Membresia getMembresia() {
         return membresia;
     }
@@ -96,6 +121,26 @@ public class MembresiaController implements Serializable {
     public void setSociosPorVencer(List<Socio> sociosPorVencer) {
         this.sociosPorVencer = sociosPorVencer;
     }
+
+    public List<Membresia> getSociosActivosVigentes() {
+        return sociosActivosVigentes;
+    }
+
+    public void setSociosActivosVigentes(List<Membresia> sociosActivosVigentes) {
+        this.sociosActivosVigentes = sociosActivosVigentes;
+    }
+
+    public List<Membresia> getRecaudacionPorPlan() {
+        return recaudacionPorPlan;
+    }
+
+    public void setRecaudacionPorPlan(List<Membresia> recaudacionPorPlan) {
+        this.recaudacionPorPlan = recaudacionPorPlan;
+    }
+    
+    
+    
+   
 
     public String getMensaje() {
         return mensaje;

@@ -13,38 +13,40 @@
     <!-- Custom CSS -->
     <style>
         :root {
-            --sena-naranja: #FF5800;
-            --sena-verde: #39A900;
-            --sena-azul: #004884;
+            --fit-rojo: #DC3545;
+            --fit-negro: #121212;
+            --fit-gris-oscuro: #212529;
         }
         
         .navbar-sena {
-            background: linear-gradient(135deg, var(--sena-verde) 0%, var(--sena-azul) 100%);
+            background: linear-gradient(135deg, var(--fit-negro) 0%, var(--fit-gris-oscuro) 100%);
+            border-bottom: 3px solid var(--fit-rojo);
         }
         
         .btn-sena {
-            background-color: var(--sena-naranja);
-            border-color: var(--sena-naranja);
+            background-color: var(--fit-rojo);
+            border-color: var(--fit-rojo);
             color: white;
         }
         
         .btn-sena:hover {
-            background-color: #e04d00;
-            border-color: #e04d00;
+            background-color: #bb2d3b;
+            border-color: #b02a37;
             color: white;
         }
         
         .card-header-sena {
-            background: linear-gradient(135deg, var(--sena-verde) 0%, var(--sena-azul) 100%);
+            background: linear-gradient(135deg, var(--fit-negro) 0%, var(--fit-gris-oscuro) 100%);
             color: white;
+            border-bottom: 2px solid var(--fit-rojo);
         }
         
         .table-hover tbody tr:hover {
-            background-color: rgba(57, 169, 0, 0.1);
+            background-color: rgba(220, 53, 69, 0.08);
         }
         
         .badge-activo {
-            background-color: var(--sena-verde);
+            background-color: var(--fit-rojo);
         }
         
         .badge-inactivo {
@@ -52,8 +54,9 @@
         }
         
         .footer-sena {
-            background-color: var(--sena-azul);
+            background-color: var(--fit-negro);
             color: white;
+            border-top: 3px solid var(--fit-rojo);
             margin-top: 50px;
         }
     </style>
