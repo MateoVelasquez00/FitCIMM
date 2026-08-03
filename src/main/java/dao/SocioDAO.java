@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import model.Socio;
+import model.Membresia;
 
 public class SocioDAO {
 
@@ -123,34 +124,32 @@ public class SocioDAO {
         return lista;
     }
 
-    public Socio MtDetalleSocio(int membresiaId) {
-        Socio socio = null;
-
-        String consulta = "SELECT s.*, m.fecha_inicio,m.fecha_fin, valor_pagado FROM socio s"
-                + "INNER JOIN membresia m ON m.id_socio = s.id_socio"
-                + "WHERE s.id = ?";
+    public List<Membresia> MtListarMembresiasPorSocio(int socioId) {
+        List<Membresia> lista = new ArrayList<>();
+        String consulta = "SELECT m.* FROM membresia m "
+                + "INNER JOIN socio s ON m.id_socio = s.id_socio "
+                + "WHERE s.id_socio = ?";
 
         try (Connection conn = Conexion.getConnection(); PreparedStatement pstmt = conn.prepareStatement(consulta)) {
-            pstmt.setInt(1, membresiaId);
+
+            pstmt.setInt(1, socioId);
 
             try (ResultSet rs = pstmt.executeQuery()) {
-
-                if (rs.next()) {
-                    socio = new Socio();
-                    socio.setId(rs.getInt("id_socio"));
-                    socio.setDocumento(rs.getString("documento"));
-                    socio.setNombre(rs.getString("nombres"));
-                    socio.setApellido(rs.getString("apellidos"));
-                    socio.setTelefono(rs.getString("telefono"));
-                    socio.setCorreo(rs.getString("correo"));
-                    socio.setFechaNacimiento(rs.getDate("fecha_nacimiento").toLocalDate());
-                    socio.setEstado(rs.getBoolean("estado"));
+                while (rs.next()) {
+                    Membresia membresia = new Membresia();
+                    membresia.setId(rs.getInt("id_membresia"));
+                    membresia.setIdSocio(rs.getInt("id_socio"));
+                    membresia.setIdPlan(rs.getInt("id_plan"));
+                    membresia.setFechaInicio(rs.getDate("fecha_inicio").toLocalDate());
+                    membresia.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
+                    membresia.setValorPagado(rs.getBigDecimal("valor_pagado"));
+                    lista.add(membresia);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return socio;
+        return lista;
     }
 
     public boolean MtEstadoSocio(int idSocio, boolean nuevoEstado) {

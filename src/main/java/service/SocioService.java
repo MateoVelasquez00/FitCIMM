@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import model.Socio;
+import model.Membresia;
 
 public class SocioService {
 
@@ -51,8 +52,8 @@ public class SocioService {
         return socioDAO.MtBuscarSocio(criterio);
     }
     
-    public Socio MtDetalleSocio(int membresiaId){
-        return socioDAO.MtDetalleSocio(membresiaId);
+    public List<Membresia> MtDetalleSocio(int socioId){
+        return socioDAO.MtListarMembresiasPorSocio(socioId);
     }
     
     public Socio MtBuscarPorDocumento(String documento){

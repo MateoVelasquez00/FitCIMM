@@ -3,23 +3,25 @@ package controller;
 import java.io.Serializable;
 import java.util.List;
 import model.Socio;
+import model.Membresia;
 import service.SocioService;
 
 public class SocioController implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     private SocioService socioService;
     private Socio socio;
     private List<Socio> socios;
+    private List<Membresia> listaMembresias;
     private String mensaje;
     private String tipoMensaje;
-    
+
     public SocioController() {
         this.socioService = new SocioService();
         this.socio = new Socio();
     }
-    
+
     public String MtListarSocios() {
         try {
             socios = socioService.MtListarSocios();
@@ -30,7 +32,7 @@ public class SocioController implements Serializable {
             return "error";
         }
     }
-    
+
     public String MtBuscarSocio(String criterio) {
         try {
             if (criterio != null && !criterio.trim().isEmpty()) {
@@ -45,7 +47,7 @@ public class SocioController implements Serializable {
             return "error";
         }
     }
-    
+
     public String MtCrearSocio(Socio NuevoSocio) {
         try {
             socioService.MtInsertarSocio(NuevoSocio);
@@ -58,7 +60,7 @@ public class SocioController implements Serializable {
             return "error";
         }
     }
-    
+
     public String MtActualizarSocio(Socio socioActualizado) {
         try {
             socioService.MtActualizarSocio(socioActualizado);
@@ -71,7 +73,7 @@ public class SocioController implements Serializable {
             return "error";
         }
     }
-    
+
     public String MtEstadoSocio(int idSocio, boolean nuevoEstado) {
         try {
             socioService.MtEstadoSocio(idSocio, nuevoEstado);
@@ -84,10 +86,11 @@ public class SocioController implements Serializable {
             return "error";
         }
     }
-    
-    public String MtDetalleSocio(int idMembresia) {
+
+    public String MtDetalleSocio(int idSocio) {
         try {
-            socio = socioService.MtDetalleSocio(idMembresia);
+            socio = socioService.MtObtenerPorId(idSocio);
+            listaMembresias = socioService.MtDetalleSocio(idSocio);
             return "success";
         } catch (Exception e) {
             mensaje = "Error al mostrar detalle: " + e.getMessage();
@@ -95,7 +98,7 @@ public class SocioController implements Serializable {
             return "error";
         }
     }
-    
+
     public String MtBuscarPorDocumento(String documento) {
         try {
             socio = socioService.MtBuscarPorDocumento(documento);
@@ -111,7 +114,7 @@ public class SocioController implements Serializable {
             return "error";
         }
     }
-    
+
     public String MtObtenerPorId(int idSocio) {
         try {
             socio = socioService.MtObtenerPorId(idSocio);
@@ -127,35 +130,35 @@ public class SocioController implements Serializable {
             return "error";
         }
     }
-    
+
     public Socio getSocio() {
         return socio;
     }
-    
+
     public void setSocio(Socio socio) {
         this.socio = socio;
     }
-    
+
     public List<Socio> getSocios() {
         return socios;
     }
-    
+
     public void setSocios(List<Socio> socios) {
         this.socios = socios;
     }
-    
+
     public String getMensaje() {
         return mensaje;
     }
-    
+
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
-    
+
     public String getTipoMensaje() {
         return tipoMensaje;
     }
-    
+
     public void setTipoMensaje(String tipoMensaje) {
         this.tipoMensaje = tipoMensaje;
     }
